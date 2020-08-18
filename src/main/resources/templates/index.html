@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header(~{::title},~{})">
+  <title>首页</title>
+</head>
+<body style="text-align: center">
+<div class="layui-container" id="container" style="width: fit-content">
+    <table class="layui-table" id="soduku" lay-filter="soduku"></table>
+    <div>
+        <button id="submit" type="button" class="layui-btn layui-btn-normal">解答</button>
+        <button id="reset" type="button" class="layui-btn layui-btn-danger">重置</button>
+    </div>
+</div>
+<div th:include="include::footer(~{})">
+</div>
+<script th:inline="none">
+    let data = []
+    layui.use('table', function () {
+        initData();
+        let table = layui.table;
+        table.renderTable = function () {
+            table.render({
+                elem: '#soduku',
+                cols: [[
+                    // {field: 'index', title: '', width: 60},
+                    {field: 'number1', title: 'A', width: 50, edit: 'text',},
+                    {field: 'number2', title: 'B', width: 50, edit: 'text'},
+                    {field: 'number3', title: 'C', width: 50, edit: 'text'},
+                    {field: 'number4', title: 'D', width: 50, edit: 'text'},
+                    {field: 'number5', title: 'E', width: 50, edit: 'text'},
+                    {field: 'number6', title: 'F', width: 50, edit: 'text'},
+                    {field: 'number7', title: 'G', width: 50, edit: 'text'},
+                    {field: 'number8', title: 'H', width: 50, edit: 'text'},
+                    {field: 'number9', title: 'I', width: 50, edit: 'text'}
+                ]],
+                data: data
+            })
+        };
+        table.renderTable();
+        table.on('edit(soduku)', function(obj){
+            console.log(obj)
+        });
+        $('#submit').on('click', function () {
+            Util.ajax({
+                url: '/table/fill',
+                data: data,
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    data = res;
+                    table.renderTable();
+                }
+            })
+        })
+        $('#reset').on('click', function () {
+            initData();
+            table.renderTable();
+        })
+        function initData() {
+            data = [
+                {index: "1", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "2", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "3", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "4", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "5", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "6", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "7", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "8", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+                {index: "9", number1: '', number2: '', number3: '', number4: '', number5: '', number6: '', number7: '', number8: '', number9: ''},
+            ]
+        }
+    })
+</script>
+</body>
+</html>
+<style>
+    .layui-table-header, .layui-table-body, .layui-table-main, .layui-table-box, .layui-form, .layui-border-box, .layui-table-view{
+        width: fit-content;
+    }
+</style>

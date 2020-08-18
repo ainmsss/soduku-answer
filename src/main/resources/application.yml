@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: true
+  devtools:
+    restart:
+      enabled: false
+  aop:
+    auto: true
+    proxy-target-class: true
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/

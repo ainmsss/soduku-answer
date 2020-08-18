@@ -1,0 +1,255 @@
+/********************Plugs Styles******************/
+
+.input_tip {
+    position: absolute;
+    z-index: 1;
+    padding: 5px 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    opacity: 0;
+    white-space: nowrap;
+    line-height: 22px;
+}
+
+.input_tip.error {
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+}
+
+.input_tip.info {
+    color: #3A87AD;
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+}
+
+.input_tip_arrow {
+    border: 8px solid transparent;
+    border-right: 8px solid #F2DEDE;
+    position: absolute;
+    left: -16px;
+    top: 8px;
+}
+
+.input_tip_arrow_right {
+    border: 8px solid transparent;
+    border-left: 8px solid #F2DEDE;
+    position: absolute;
+    right: -16px;
+    top: 8px;
+}
+
+.input_tip.info .input_tip_arrow {
+    border-right: 8px solid #D9EDF7;
+}
+
+.input_errored, .input_errored:focus {
+    /*box-shadow: 0px 0px 4px #F44336;*/
+    border:1px solid #F44336!important;
+}
+
+.input_wrapper {
+    display: inline-block;
+    margin: 0px;
+}
+
+.input_tip_bottom {
+    color: #ff4949;
+    font-size: 12px;
+    line-height: 1;
+    padding-top: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.win_tip_box {
+    position: fixed;
+    text-align: center;
+    opacity: 0;
+    z-index: 3;
+}
+
+.win_tip_title{
+    background: #00b8f5;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 28px;
+    line-height: 28px;
+    text-indent: 0.5em;
+}
+
+
+.win_tip {
+    padding: 7px 15px;
+    /*text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);*/
+    /*-webkit-border-radius: 4px;*/
+    /*-moz-border-radius: 4px;*/
+    /*border-radius: 4px;*/
+    display: inline-block;
+    margin: 0px auto;
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);*/
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width:350px;
+    min-height: 100px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.win_tip_close{
+    position: absolute;
+    right: 15px;
+    background: #00b8f5;
+    bottom: 9px;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.win_tip_close:hover{
+    background: #42aae7;
+}
+.win_tip_close:focus{
+    background: #42aae7;
+}
+
+.win_tip.error {
+    /*color: white;*/
+    /*background-color: #F2DEDE;*/
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+.win_tip.success {
+    /*color: white;*/
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+.win_tip.info {
+    /*color: white;*/
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+.dlg_mask {
+    background: #ddd;
+    opacity: 0.60;
+    filter: alpha(opacity = 60);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 3000px;
+    height: 3000px;
+    z-index: 2;
+}
+
+.dlg {
+    background-color: #fff;
+    position: fixed;
+    border: 1px solid #acacac;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: none;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.dlg_header {
+    height: 43px;
+    line-height: 41px;
+    font-size: 16px;
+    background: #efefef;
+    border-top: 1px solid #00b8f5;
+    border-bottom: 1px solid #bfbcbc;
+    padding: 0px 30px 0px 16px;
+    font-family: "microsoft yahei", simhei;
+    cursor: move;
+}
+
+.dlg_content {
+    padding: 15px 20px;
+}
+
+.dlg_buttons .btn {
+    margin-left: 10px;
+}
+
+.dlg_buttons {
+    padding: 0px 20px 20px;
+    text-align: right;
+}
+
+.dlg_close {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+.dlg_close .close_ico {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    background: url(../images/common20.png) 0px -80px no-repeat;
+}
+
+.dlg_close:hover {
+    background: #e5e5e5;
+}
+
+#global_confirm_window {
+    max-width: 450px;
+}
+
+.confirm_msg {
+    padding: 20px 0px;
+    min-width: 300px;
+    color: red;
+}
+
+.okbtn{
+    /*position: absolute;*/
+    right: 15px;
+    background: #00b8f5;
+    bottom: 9px;
+    color: white;
+    /*font-size: 12px;*/
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.okbtn:hover{
+    background: #42aae7;
+}
+.okbtn:focus{
+    background: #42aae7;
+}
+
+/*自定义*/
+.layui-form-item{
+    margin-bottom: 25px!important;
+}
+/*.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {*/
+    /*background-color: #fff!important;*/
+/*}*/
+/*pdf签章页面固定大小*/
+.pdf-right{
+    width: 100%;
+    min-width: 500px;
+    height: 800px;
+    vertical-align: text-top;
+}
+
+.layui-form{
+    background-color: #fff;
+}

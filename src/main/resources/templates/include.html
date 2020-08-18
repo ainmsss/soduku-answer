@@ -1,0 +1,25 @@
+<head th:fragment="header(title,links)">
+	<title th:replace="${title}">title</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/layui/css/layui.css}" media="all" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/style/theme.css}" media="all" />
+
+	<link rel="stylesheet" type="text/css" th:href="@{/plugins/css/common.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layuiadmin/style/admin.css}" media="all"/>
+
+	<!--th:block 参数循环-->
+	<th:block th:replace="${links}" />
+</head>
+<div th:fragment="footer(scripts)">
+
+	<script type="text/javascript" th:src="@{/layuiadmin/layui/layui.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/common.js}"></script>
+	<!--th:block 参数循环-->
+	<th:block th:replace="${scripts}" />
+</div>
