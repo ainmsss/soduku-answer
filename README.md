@@ -1,1 +1,9 @@
-# soduku-answer
+# 基于java的数独解答器
+
+### 1. 项目介绍：  
+基于`springboot + thymeleaf + layui`的练习项目，服务层运用大量循环及方法递归解决数独问题。  
+页面主要展示了`layui`的数据表格的填充、自定义样式及弹出框的基本使用。
+  
+### 2. 使用方法：  
+直接运行`SodukuAnswerApplication.java`中的main方法，默认启动端口为8080，启动完成后页面访问`localhost:8080`即可。  
+点击表格中的位置填入数字，提交后会返回当前谜题结果并自动填充表格。
