@@ -15,6 +15,7 @@
 </div>
 <script th:inline="none">
     let data = []
+    let windowWidth = $(document).width
     layui.use('table', function () {
         initData();
         let table = layui.table;
@@ -22,19 +23,45 @@
             table.render({
                 elem: '#soduku',
                 cols: [[
-                    {field: 'number1', title: 'A', width: 50, event: 'number1'},
-                    {field: 'number2', title: 'B', width: 50, event: 'number2'},
-                    {field: 'number3', title: 'C', width: 50, event: 'number3'},
-                    {field: 'number4', title: 'D', width: 50, event: 'number4'},
-                    {field: 'number5', title: 'E', width: 50, event: 'number5'},
-                    {field: 'number6', title: 'F', width: 50, event: 'number6'},
-                    {field: 'number7', title: 'G', width: 50, event: 'number7'},
-                    {field: 'number8', title: 'H', width: 50, event: 'number8'},
-                    {field: 'number9', title: 'I', width: 50, event: 'number9'}
+                    {field: 'number1', title: 'A', event: 'number1', templet: function (data) {return formatContent(data, 1)}},
+                    {field: 'number2', title: 'B', event: 'number2', templet: function (data) {return formatContent(data, 2)}},
+                    {field: 'number3', title: 'C', event: 'number3', style: "border-right:1px solid #585858", templet: function (data) {return formatContent(data, 3)}},
+                    {field: 'number4', title: 'D', event: 'number4', templet: function (data) {return formatContent(data, 4)}},
+                    {field: 'number5', title: 'E', event: 'number5', templet: function (data) {return formatContent(data, 5)}},
+                    {field: 'number6', title: 'F', event: 'number6', style: "border-right:1px solid #585858", templet: function (data) {return formatContent(data, 6)}},
+                    {field: 'number7', title: 'G', event: 'number7', templet: function (data) {return formatContent(data, 7)}},
+                    {field: 'number8', title: 'H', event: 'number8', templet: function (data) {return formatContent(data, 8)}},
+                    {field: 'number9', title: 'I', event: 'number9', templet: function (data) {return formatContent(data, 9)}}
                 ]],
-                data: data
+                data: data,
+                done: function (res, curr, count) {
+                    for (let i = 0; i < 9; i++) {
+                        let row = $("tr[data-index='" + i + "']")
+                        row[0].childNodes.forEach((item, index) => {
+                            if (i === 2 || i === 5) {
+                                item.style["border-bottom"] = "1px solid #585858";
+                            }
+                            if (i%2 === 0) {
+                                if (index%2 === 0) {
+                                    item.style["background-color"] = "#EFFBFB";
+                                } else {
+                                    item.style["background-color"] = "#FFFFFF";
+                                }
+                            } else {
+                                if (index%2 !== 0) {
+                                    item.style["background-color"] = "#EFFBFB";
+                                } else {
+                                    item.style["background-color"] = "#FFFFFF";
+                                }
+                            }
+                        })
+                    }
+                }
             })
         };
+        function formatContent(data, index) {
+            return '<span style="width: fit-content;font-weight:bold;font-size: 14px;color: ' + data["color" + index] + ';">'+ data["number" + index] +'</span>'
+        }
         table.renderTable();
         //监听单元格事件
         table.on('tool(sodukuEvent)', function (obj) {
@@ -97,7 +124,17 @@
                 type: 'post',
                 dataType: 'json',
                 success: function (res) {
-                    data = res;
+                    for (let i = 0; i < 9; i++) {
+                        let origin = data[i]
+                        let result = res[i]
+                        for (let j = 1; j < 10; j++) {
+                            if (origin["number" + j] === "") {
+                                origin["number" + j] = result["number" + j]
+                                origin["color" + j] = "#01A9DB"
+                            }
+                        }
+                    }
+                    console.log(data)
                     table.renderTable();
                 }
             })
@@ -113,6 +150,7 @@
                 let obj = {index: i}
                 for (let j = 1; j < 10; j++) {
                     obj["number" + j] = '';
+                    obj["color" + j] = '#666666';
                 }
                 data.push(obj)
             }
@@ -122,7 +160,24 @@
 </body>
 </html>
 <style>
+    th, td {
+        padding: 0 0 !important;
+        width: 35px;
+        height: 35px;
+    }
+    span {
+        padding: 0 0;
+    }
+    .layui-table-cell {
+        text-align: center;
+        width: 35px !important;
+        height: 35px !important;
+        padding: 0 0 !important;
+    }
     .layui-table-header, .layui-table-body, .layui-table-main, .layui-table-box, .layui-form, .layui-border-box, .layui-table-view {
         width: fit-content;
+    }
+    .layui-table tbody tr:hover {
+        color: unset !important;
     }
 </style>
