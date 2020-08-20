@@ -2,6 +2,9 @@ package com.cc.sodukuanswer.entity;
 
 import lombok.Data;
 
+/*
+* 单行结果类
+* */
 @Data
 public class SodukuRow {
 

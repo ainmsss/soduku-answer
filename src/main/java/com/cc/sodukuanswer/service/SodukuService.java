@@ -11,11 +11,19 @@ import java.util.List;
 
 @Service
 public class SodukuService {
-    
+
+    /**
+    * 解决数独问题
+    * @param data 传入的原始谜题
+    * @return 返回解出的谜题结果
+    * */
     public List<SodukuRow> fillSoduku(List<SodukuRow> data) {
+        // 格式化参数，构建soduku对象，并调用解答函数
         int[][] ints = formatData(data);
         Soduku soduku = new Soduku(ints, 0);
         int[][] result = soduku.start();
+
+        // 格式化返回值
         SodukuRow sodukuRow = null;
         List<SodukuRow> list = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
@@ -26,10 +34,18 @@ public class SodukuService {
         return list;
     }
 
+    /**
+     * 获取当前单元格可用的按钮
+     * @param params 计算按钮所需参数
+     * @return 返回当前单元格可用的按钮
+     * */
     public List<Integer> getBtns(BtnParams params) {
+        // 声明结果list并获取参数
         List<Integer> allowBtns = new ArrayList<>();
         Coordinate coordinate = params.getCoordinate();
         int[][] ints = formatData(params.getDataList());
+
+        // 构建soduku对象，校验当前位置可以填入的数字
         Soduku soduku = new Soduku(ints, 0);
         for (int i = 1; i < 10; i++) {
             coordinate.setValue(i);
@@ -39,7 +55,12 @@ public class SodukuService {
         }
         return allowBtns;
     }
-    
+
+    /**
+     * 格式化数据
+     * @param data 页面传入参数
+     * @return 返回计算所需二维数组
+     * */
     private int[][] formatData(List<SodukuRow> data) {
         return new int[][]{
                 {data.get(0).getNumber1(), data.get(0).getNumber2(), data.get(0).getNumber3(), data.get(0).getNumber4(), data.get(0).getNumber5(), data.get(0).getNumber6(), data.get(0).getNumber7(), data.get(0).getNumber8(), data.get(0).getNumber9()},
