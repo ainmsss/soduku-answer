@@ -1,4 +1,4 @@
-package com.cc.sodukuanswer;
+package com.cc.sodukuanswer.entity;
 
 import lombok.Data;
 

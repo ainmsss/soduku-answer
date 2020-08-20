@@ -1,6 +1,9 @@
-package com.cc.sodukuanswer;
+package com.cc.sodukuanswer.service;
 
+import com.cc.sodukuanswer.entity.Coordinate;
+import com.cc.sodukuanswer.params.BtnParams;
 import com.cc.sodukuanswer.utils.Soduku;
+import com.cc.sodukuanswer.entity.SodukuRow;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +24,20 @@ public class SodukuService {
             list.add(sodukuRow);
         }
         return list;
+    }
+
+    public List<Integer> getBtns(BtnParams params) {
+        List<Integer> allowBtns = new ArrayList<>();
+        Coordinate coordinate = params.getCoordinate();
+        int[][] ints = formatData(params.getDataList());
+        Soduku soduku = new Soduku(ints, 0);
+        for (int i = 1; i < 10; i++) {
+            coordinate.setValue(i);
+            if (soduku.check(coordinate)) {
+                allowBtns.add(i);
+            }
+        }
+        return allowBtns;
     }
     
     private int[][] formatData(List<SodukuRow> data) {

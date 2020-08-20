@@ -1,5 +1,6 @@
 package com.cc.sodukuanswer.utils;
 
+import com.cc.sodukuanswer.entity.Coordinate;
 import lombok.Data;
 
 import java.util.*;
@@ -12,7 +13,10 @@ public class Soduku {
 
     private int[][] block = {{0 ,1, 2}, {3, 4, 5}, {6, 7, 8}};
 
-    private boolean check(int x, int y, int value) {
+    public boolean check(Coordinate coordinate) {
+        int x = coordinate.getX();
+        int y = coordinate.getY();
+        int value = coordinate.getValue();
         // 校验行内重复
         for (int row_number : soduku[x]) {
             if (row_number == value)
@@ -51,7 +55,8 @@ public class Soduku {
         return !block_numbers.contains(value);
     }
 
-    private Map<String, Integer> getNext(int x, int y, boolean recursion) {
+    private Coordinate getNext(int x, int y, boolean recursion) {
+        Coordinate coordinate = new Coordinate(-1, -1);
         Map<String, Integer> resMap = new HashMap<>();
         resMap.put("x", -1);
         resMap.put("y", -1);
@@ -59,27 +64,27 @@ public class Soduku {
             y += 1;
         for (int next_y = y; next_y < 9; next_y ++) {
             if (soduku[x][next_y] == 0) {
-                resMap.replace("x", x);
-                resMap.replace("y", next_y);
-                return resMap;
+                coordinate.setX(x);
+                coordinate.setY(next_y);
+                return coordinate;
             }
         }
         if (x < 8) {
             return getNext(x + 1, 0, true);
         }
 
-        return resMap;
+        return coordinate;
     }
 
     private boolean trySoduku(int x, int y) {
         if (soduku[x][y] == 0) {
             for (int i = 1; i < 10; i++) {
                 this.times += 1;
-                if (this.check(x, y, i)) {
+                if (this.check(new Coordinate(x, y, i))) {
                     soduku[x][y] = i;
-                    Map<String, Integer> next = this.getNext(x, y, false);
-                    int next_x = next.get("x");
-                    int next_y = next.get("y");
+                    Coordinate next = this.getNext(x, y, false);
+                    int next_x = next.getX();
+                    int next_y = next.getY();
                     if (next_x == -1)
                         return true;
                     else {
@@ -101,8 +106,8 @@ public class Soduku {
         if (soduku[0][0] == 0) {
             this.trySoduku(0, 0);
         } else {
-            Map<String, Integer> next = this.getNext(0, 0, false);
-            this.trySoduku(next.get("x"), next.get("y"));
+            Coordinate next = this.getNext(0, 0, false);
+            this.trySoduku(next.getX(), next.getY());
         }
         for (int[] ints : soduku) {
             System.out.println(Arrays.toString(ints));
